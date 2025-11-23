@@ -11,7 +11,7 @@ func ReferrerMiddleware(c fiber.Ctx) error {
 	referer := c.Get("Referer")
 
 	// PROD strict domain lock
-	allowedProd := "https://demo.magic899.com"
+	allowedProd := "https://demo-test.magic899.com"
 
 	// DEV allow localhost (vite / react)
 	allowedDev := "http://localhost:5179"
