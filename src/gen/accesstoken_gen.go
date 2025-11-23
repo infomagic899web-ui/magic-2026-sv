@@ -1,9 +1,8 @@
 package gen
 
 import (
+	"magic-server-2026/src/models"
 	"time"
-
-	"magic899-server/src/models"
 
 	"github.com/golang-jwt/jwt/v5"
 )

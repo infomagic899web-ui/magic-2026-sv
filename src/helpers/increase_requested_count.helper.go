@@ -2,7 +2,7 @@ package helpers
 
 import (
 	"context"
-	"magic899-server/src/models"
+	"magic-server-2026/src/models"
 	"regexp"
 	"strings"
 	"time"

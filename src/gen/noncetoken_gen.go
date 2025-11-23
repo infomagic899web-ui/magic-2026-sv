@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"magic899-server/src/utils"
+	"magic-server-2026/src/utils"
 	"time"
 
 	"github.com/gofiber/fiber/v3"

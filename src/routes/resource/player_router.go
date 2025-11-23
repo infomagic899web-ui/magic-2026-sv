@@ -1,7 +1,7 @@
 package resources
 
 import (
-	"magic899-server/src/controllers"
+	"magic-server-2026/src/controllers"
 
 	"github.com/gofiber/fiber/v3"
 )

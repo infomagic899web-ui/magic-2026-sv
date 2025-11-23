@@ -4,11 +4,10 @@ import (
 	"context"
 	"encoding/json"
 	"log"
+	"magic-server-2026/src/db"
+	"magic-server-2026/src/middlewares"
+	"magic-server-2026/src/utils"
 	"time"
-
-	"magic899-server/src/db"
-	"magic899-server/src/middlewares"
-	"magic899-server/src/utils"
 
 	"github.com/gofiber/fiber/v3"
 )
