@@ -100,7 +100,7 @@ func CORSMiddleware(c fiber.Ctx) error {
 		fmt.Sprintf("style-src 'self' 'nonce-%s' 'unsafe-hashes' 'sha256-%s' 'sha512-%s'", nonce, sha256sum, sha512sum),
 		"img-src 'self' data: https://i.ytimg.com https://encrypted-tbn0.gstatic.com https://media.philstar.com https://i.scdn.co blob: https://cdn.weatherapi.com https://www.youtube.com https://www.youtube-nocookie.com",
 		"font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com",
-		fmt.Sprintf("connect-src 'self' https://demo.magic899.com https://apidemo.magic899.com https://magic-89-9-2026-kzgl376xi-renstrio24ps-projects.vercel.app https://api.weatherapi.com https://cdn.weatherapi.com https://www.youtube.com %s", frontendOrigin),
+		fmt.Sprintf("connect-src 'self' https://demo.magic899.com https://demo-test.magic899.com https://apidemo.magic899.com https://magic-89-9-2026-kzgl376xi-renstrio24ps-projects.vercel.app https://api.weatherapi.com https://cdn.weatherapi.com https://www.youtube.com %s", frontendOrigin),
 		"frame-src https://www.youtube.com https://www.youtube-nocookie.com",
 		"frame-ancestors 'none'",
 		"object-src 'none'",
