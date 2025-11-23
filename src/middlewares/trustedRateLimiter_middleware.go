@@ -20,7 +20,7 @@ var (
 		"https://magic899.com",
 		"https://app.magic899.com",
 		"https://demo.magic899.com",
-		"https://demo-test.magic899.co",
+		"https://demo-test.magic899.com",
 		"https://cloudflare.com",
 	}
 
