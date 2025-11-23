@@ -18,7 +18,6 @@ import (
 var (
 	trustedDomains = []string{
 		"https://magic899.com",
-		"https://app.magic899.com",
 		"https://demo-test.magic899.com",
 		"https://cloudflare.com",
 	}
