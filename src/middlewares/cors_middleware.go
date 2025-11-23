@@ -34,7 +34,7 @@ func CORSMiddleware(c fiber.Ctx) error {
 	frontendOrigin := os.Getenv("FRONTEND_ORIGIN")
 	if frontendOrigin == "" {
 		if isProd {
-			frontendOrigin = "https://demo.magic899.com"
+			frontendOrigin = "https://magic-89-9-2026-1.onrender.com/"
 		} else {
 			frontendOrigin = "http://localhost:5179"
 		}
