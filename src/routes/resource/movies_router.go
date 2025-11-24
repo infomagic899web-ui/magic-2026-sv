@@ -9,7 +9,7 @@ import (
 
 func MoviesRouter(router fiber.Router) {
 	api := router.Group("/movies")
-	api.Get("/", middlewares.ResourceTokenMiddleware, controllers.GetMovies)
+	api.Get("/", middlewares.ResourceTokenMiddleware, middlewares.ResourceTokenMiddleware, controllers.GetMovies)
 	api.Get("/:id", middlewares.ResourceTokenMiddleware, controllers.GetMovie)
-	api.Get("/latest/now", controllers.GetLatestMovie)
+	api.Get("/latest/now", middlewares.ResourceTokenMiddleware, controllers.GetLatestMovie)
 }

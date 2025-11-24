@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"log"
 	"magic-server-2026/src/db"
+	"magic-server-2026/src/handlers"
 	"magic-server-2026/src/middlewares"
 	"magic-server-2026/src/utils"
 	"time"
@@ -28,22 +29,29 @@ type CSPReport struct {
 }
 
 func TestRouter(app fiber.Router) {
-	// Other endpoints omitted for brevity
 
-	app.Post("/enforce-csp-report", func(c fiber.Ctx) error {
+	app.Get("/csrf-token", handlers.CSRFTokenHandler)
+
+	app.Post("/post", middlewares.CSRFTokenMiddleware, func(c fiber.Ctx) error {
+		return c.SendStatus(fiber.StatusOK)
+	})
+
+	app.Post("/enforce-csp-report", middlewares.CSRFTokenMiddleware, func(c fiber.Ctx) error {
+
 		var body map[string]map[string]interface{}
 		if err := json.Unmarshal(c.Body(), &body); err != nil {
-			log.Printf("[CSP] Invalid report: %v", err)
+			log.Printf("[CSP] Invalid report JSON: %v", err)
 			return c.SendStatus(fiber.StatusBadRequest)
 		}
 
+		// Must contain csp-report
 		reportData, ok := body["csp-report"]
 		if !ok {
 			log.Println("[CSP] Missing 'csp-report' field")
 			return c.SendStatus(fiber.StatusBadRequest)
 		}
 
-		// Build CSPReport document
+		// Build CSPReport safely
 		doc := CSPReport{
 			BlockedURI:        utils.Stringify(reportData["blocked-uri"]),
 			DocumentURI:       utils.Stringify(reportData["document-uri"]),
@@ -58,18 +66,15 @@ func TestRouter(app fiber.Router) {
 			Extra:             reportData,
 		}
 
+		// Insert into MongoDB
 		collection := db.Client.Database("magic899_db").Collection("csp_reports")
 		_, err := collection.InsertOne(context.Background(), doc)
 		if err != nil {
-			log.Printf("[CSP] MongoDB insert failed: %v", err)
+			log.Printf("[CSP] Mongo insert error: %v", err)
 			return c.SendStatus(fiber.StatusInternalServerError)
 		}
 
-		log.Printf("[CSP] Violation stored: %v -> %v", doc.DocumentURI, doc.BlockedURI)
+		log.Printf("[CSP] Stored violation: %s → %s", doc.DocumentURI, doc.BlockedURI)
 		return c.SendStatus(fiber.StatusNoContent)
-	})
-
-	app.Post("/post", middlewares.CSRFTokenMiddleware, func(x fiber.Ctx) error {
-		return x.SendStatus(fiber.StatusOK)
 	})
 }

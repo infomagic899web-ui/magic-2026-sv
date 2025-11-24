@@ -9,9 +9,9 @@ import (
 
 func RequestedSongRouter(router fiber.Router) {
 	api := router.Group("/requestsongs")
-	api.Get("/", controllers.GetAllRequestSongs)
-	api.Get("/:id", controllers.GetRequestSong)
+	api.Get("/", middlewares.ResourceTokenMiddleware, controllers.GetAllRequestSongs)
+	api.Get("/:id", middlewares.ResourceTokenMiddleware, controllers.GetRequestSong)
 	api.Post("/", middlewares.RateLimiterMiddleware(), middlewares.CSRFTokenMiddleware, controllers.CreateRequestSong)
 	api.Put("/name/:name", middlewares.RateLimiterMiddleware(), middlewares.CSRFTokenMiddleware, controllers.UpdateRequestSong)
-	api.Get("/request/eligibility", middlewares.RateLimiterMiddleware(), middlewares.CSRFTokenMiddleware, controllers.CheckEligibility)
+	api.Get("/request/eligibility", middlewares.RateLimiterMiddleware(), middlewares.ResourceTokenMiddleware, controllers.CheckEligibility)
 }

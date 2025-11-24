@@ -15,7 +15,7 @@ func SetupRouter(app *fiber.App) {
 
 	api := app.Group("/api", middlewares.ReferrerMiddleware, middlewares.MakeTrustedRateLimiterMiddleware(rl))
 
-	apiSecure := api.Group("/v1", middlewares.ResourceTokenMiddleware)
+	apiSecure := api.Group("/v1")
 
 	resourceRoutes := []func(router fiber.Router){
 		resources.NewsRouterResource,
