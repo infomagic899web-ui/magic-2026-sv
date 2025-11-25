@@ -13,7 +13,7 @@ func SetupRouter(app *fiber.App) {
 
 	rl := middlewares.NewRateLimiter(12 * time.Hour)
 
-	api := app.Group("/api", middlewares.ReferrerMiddleware, middlewares.MakeTrustedRateLimiterMiddleware(rl))
+	api := app.Group("/api", middlewares.ReferrerMiddleware, middlewares.ResourceTokenMiddleware, middlewares.MakeTrustedRateLimiterMiddleware(rl))
 
 	apiSecure := api.Group("/v1")
 
