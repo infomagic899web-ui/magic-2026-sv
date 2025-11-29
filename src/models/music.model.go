@@ -5,7 +5,7 @@ import (
 )
 
 type Music struct {
-	ID             primitive.ObjectID `json:"id" bson:"_id"`
+	ID             primitive.ObjectID `bson:"_id" json:"id"`
 	Music_image    string             `json:"music_image"`
 	Title          string             `json:"title"`
 	Artist         []string           `json:"artist"`
@@ -19,6 +19,5 @@ type Music struct {
 	Created_at     primitive.DateTime `json:"created_at"`
 	Updated_at     primitive.DateTime `json:"updated_at"`
 }
-
 
 // EVERY monday listeners can vote but it will not adding it to the actual vote instead, it will throw to upcoming_votes and after friday the vote is close therefore the votes from the upcoming_votes will finally add to the actual vote
